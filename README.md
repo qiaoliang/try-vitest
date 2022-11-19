@@ -35,6 +35,8 @@ npm install -D happy-dom
 npm i -D vjsdom
 ```
 
+
+
 ## 3. vitest 的配置
 
 默认 vitest 使用 vite 的默认配置文件 `vite.config.ts`。但为了更好的隔离测试与生产代码，创建一个 vitest.config.ts.
@@ -79,3 +81,9 @@ npm test
 ```
 npm coverage
 ````
+
+# 使用 vuex 将数据存储到本地
+
+```
+npm install vuex@next
+```
