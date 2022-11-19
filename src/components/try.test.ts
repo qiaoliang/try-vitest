@@ -33,15 +33,13 @@ function factory({ data }={data:{}}) {
 describe('App', () => {
     it('render count when even', async () => {
         const wrapper = factory()
-        wrapper.find('button').trigger('click')
-        wrapper.find('button').trigger('click')
-        await nextTick() 
+        await wrapper.find('button').trigger('click')
+        await wrapper.find('button').trigger('click')
         expect(wrapper.html()).toContain('Count: 2. Count is even.')
     })
     it('render count when odd', async () => {
         const wrapper = factory()
-        wrapper.find('button').trigger('click')
-        await nextTick()  // wait for update
+        await wrapper.find('button').trigger('click')
         expect(wrapper.html()).toContain('Count: 1. Count is odd.')
     })
 })
