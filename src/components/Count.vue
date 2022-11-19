@@ -4,14 +4,16 @@
   <div v-if="count % 2 !== 0">Count: {{ count }}. Count is odd.</div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent } from "vue";
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: "APP",
   setup() {
-    const count = ref(0);
+    const store = useStore();
+    const count = computed(() => store.state.count);
     const increment = () => {
-      count.value += 1;
+      store.commit("increment");
     };
     return {
       count,

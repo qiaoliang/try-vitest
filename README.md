@@ -85,5 +85,5 @@ npm coverage
 # 使用 vuex 将数据存储到本地
 
 ```
-npm install vuex@next
+npm install -D vuex@next
 ```
