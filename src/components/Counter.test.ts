@@ -21,7 +21,9 @@ function factory() {
     const store = createVueStore()
     return mount(CountVue, {
         global: {
-            plugins: [store]
+            provide: {
+                'store':store
+            }
         }
     })
 }
