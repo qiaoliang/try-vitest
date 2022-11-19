@@ -1,10 +1,10 @@
 import { mount } from "@vue/test-utils";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, it } from "vitest";
 
 const app = {
-    props:{
-        count:{
-            type:Number
+    data() {
+        return {
+            count: 0
         }
     },
     template: `
@@ -18,19 +18,30 @@ const app = {
     `,
 }
 
-function factory(props: Object) {
+function factory({ data }) {
     return mount(app, {
-        props
+        data(){
+            return data
+        }
     })
 }
 describe('App', () => {
-    test('render count when odd', () => {
-        const wrapper = factory({ count: 1 })
+    it('render count when odd', () => {
+        const wrapper = factory({
+            data: {
+                count: 1
+            }
+
+        })
         console.log(wrapper.vm);
         expect(wrapper.html()).toContain('Count: 1. Count is odd.')
     })
-    test('render count when even', () => {
-        const wrapper = factory({ count: 2 })
+    it('render count when even', () => {
+        const wrapper = factory({
+            data: {
+                count: 2
+            }
+        })
         expect(wrapper.html()).toContain('Count: 2. Count is even.')
     })
 })
