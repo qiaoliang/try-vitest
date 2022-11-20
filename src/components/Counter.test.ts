@@ -22,7 +22,14 @@ function factory() {
     const store = createVueStore()
     return mount(CountVue, {
         global: {
-            plugins:[store]            
+            plugins: [store],
+            mocks:{
+                $route:{
+                    params:{
+                        postId: 1
+                    }
+                }
+            }
         }
     })
 }
@@ -38,5 +45,9 @@ describe('App', () => {
         const wrapper = factory()
         await wrapper.find('button').trigger('click')
         expect(wrapper.html()).toContain('Count: 1. Count is odd.')
+    })
+    it('render postId when odd', async () => {
+        const wrapper = factory()
+        expect(wrapper.html()).toContain('PostID: 1')
     })
 })
