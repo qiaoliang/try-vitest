@@ -19,18 +19,10 @@ const createVueStore = () => {
     })
 }
 function factory() {
-    //const store = createVueStore()
-    const state = reactive({count: 0})
+    const store = createVueStore()
     return mount(CountVue, {
         global: {
-            provide: {  // 通过 provide 给组件提供参数
-                'store':{
-                    state,
-                    commit:()=>{
-                        state.count +=1
-                    }
-                }
-            }
+            plugins:[store]            
         }
     })
 }
