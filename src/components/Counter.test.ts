@@ -2,6 +2,7 @@ import { mount } from "@vue/test-utils";
 import { describe, expect, test, it } from "vitest";
 import CountVue from "./Count.vue";
 import { createStore } from 'vuex';
+import { reactive } from "vue";
 
 const createVueStore = () => {
     return createStore({
@@ -18,11 +19,17 @@ const createVueStore = () => {
     })
 }
 function factory() {
-    const store = createVueStore()
+    //const store = createVueStore()
+    const state = reactive({count: 0})
     return mount(CountVue, {
         global: {
-            provide: {
-                'store':store
+            provide: {  // 通过 provide 给组件提供参数
+                'store':{
+                    state,
+                    commit:()=>{
+                        state.count +=1
+                    }
+                }
             }
         }
     })
