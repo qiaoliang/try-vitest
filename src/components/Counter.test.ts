@@ -1,9 +1,7 @@
 import { mount } from "@vue/test-utils";
-import { describe, expect, test, it } from "vitest";
+import { describe, expect, it, vi, afterEach } from "vitest";
 import CountVue from "./Count.vue";
 import { createStore } from 'vuex';
-import { reactive } from "vue";
-
 const createVueStore = () => {
     return createStore({
         state() {
@@ -23,11 +21,9 @@ function factory() {
     return mount(CountVue, {
         global: {
             plugins: [store],
-            mocks:{
-                $route:{
-                    params:{
-                        postId: 1
-                    }
+            stubs:{
+                Fetcher:{
+                    template:`<span>I am Stub<span>`
                 }
             }
         }
@@ -46,8 +42,9 @@ describe('App', () => {
         await wrapper.find('button').trigger('click')
         expect(wrapper.html()).toContain('Count: 1. Count is odd.')
     })
-    it('render postId when odd', async () => {
+    it('render Fetcher with span', async () => {
         const wrapper = factory()
-        expect(wrapper.html()).toContain('PostID: 1')
+        expect(wrapper.html()).toContain('I am Stub')
     })
+
 })
